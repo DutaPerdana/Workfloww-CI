@@ -1,0 +1,50 @@
+# .github/workflows/main.yml
+name: Kriteria 3 CI Setup
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  train-model:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      # 1. Setup Python Environment
+      - name: Set up Python 3.12.7
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.7'
+          
+      # 2. Instal Dependencies (Semua harus diinstal di sini karena tidak pakai conda.yaml)
+      - name: Install Dependencies
+        run: |
+          pip install mlflow scikit-learn pandas numpy matplotlib seaborn argparse cloudpickle
+          
+      # 3. Jalankan Script Training
+      - name: Run Model Training
+        run: |
+          python MLproject/modelling.py \
+            --n_estimators 300 \
+            --max_depth 15 
+
+      # 4. [SKILLED REQUIREMENT] Simpan Artefak mlruns/ ke Repository GitHub
+      - name: Commit MLflow Artifacts (mlruns)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Tambahkan folder mlruns/
+          git add mlruns/
+          
+          # Commit jika ada perubahan
+          git commit -m "CI: Kriteria 3 Skilled - Save MLflow artifacts (mlruns)" || true
+          
+          # Push perubahan (artefak) ke branch main
+          git push
