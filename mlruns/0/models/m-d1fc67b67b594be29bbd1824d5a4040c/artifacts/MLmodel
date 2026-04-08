@@ -1,0 +1,38 @@
+artifact_path: /home/runner/work/Workfloww-CI/Workfloww-CI/mlruns/0/models/m-d1fc67b67b594be29bbd1824d5a4040c/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.11.1
+model_id: m-d1fc67b67b594be29bbd1824d5a4040c
+model_size_bytes: 6845591
+model_uuid: m-d1fc67b67b594be29bbd1824d5a4040c
+prompts: null
+run_id: 0f33a4d9451949b1bfeb2c6999896148
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "Berat", "required": true}, {"type": "double",
+    "name": "Tinggi", "required": true}, {"type": "double", "name": "Sistolik", "required":
+    true}, {"type": "double", "name": "Diastolik", "required": true}, {"type": "double",
+    "name": "Jantung", "required": true}, {"type": "double", "name": "Suhu", "required":
+    true}, {"type": "double", "name": "SpO2", "required": true}]'
+  outputs: '[{"type": "long", "required": true}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-04-08 03:30:35.336464'
