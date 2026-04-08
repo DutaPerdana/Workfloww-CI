@@ -105,7 +105,13 @@ if __name__ == "__main__":
     input_example = X_train.head(5)
 
     # --- 5. Memulai MLflow Run 
-    mlflow.set_experiment("CI Workflow Resiko Kesehatan") 
+    if "MLFLOW_RUN_ID" not in os.environ:
+        mlflow.set_experiment("CI Workflow Resiko Kesehatan")
+
+    current_run_id = os.environ.get("MLFLOW_RUN_ID")
+
+    with mlflow.start_run(run_id=current_run_id) as run:
+        run_id = run.info.run_id
     
     # Ambil Run ID aktif 
     with mlflow.start_run() as run:
